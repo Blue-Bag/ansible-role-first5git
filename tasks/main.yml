@@ -1,4 +1,5 @@
 ---
+
 - name: Ensure git is installed (RedHat).
   yum:
     name: "{{ item }}"
@@ -17,3 +18,11 @@
 # Install git from source when git_install_from_source is true.
 - include: install-from-source.yml
   when: git_install_from_source == true
+
+  # Install the default templates
+- name: Git | Push global config file
+  template:
+    src: git-config.j2
+    dest: /etc/gitconfig
+  tags: git
+  sudo: true
