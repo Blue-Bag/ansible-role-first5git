@@ -1,9 +1,13 @@
 # Ansible Role: Git
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-git.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-git)
 
 Installs Git, a distributed version control system, on any RHEL/CentOS or Debian/Ubuntu Linux system.
 
+Based on geerlingguy.ansible-role-git
+
+only addition is to template the config - could seprate that and use the role
+
+should the check for git installed be carried out before downloading git?
 ## Requirements
 
 None.
@@ -40,12 +44,13 @@ None.
 
     - hosts: servers
       roles:
-        - { role: geerlingguy.git }
+        - { role: ansible-role-first5git }
 
 ## License
 
 MIT / BSD
 
 ## Author Information
+Forked by Blue-Bag from:
 
 This role was created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).

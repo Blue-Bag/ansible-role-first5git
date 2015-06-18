@@ -1,1 +1,15 @@
 .LSOverride
+docroot
+/tmp
+.DS_Store
+._*
+*.zip
+*.gz
+.vagrant
+*.log
+*.tar
+*.pyc
+/common/files/ssl/*
+debugvars
+vm
+*.json
