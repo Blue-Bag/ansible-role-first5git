@@ -8,6 +8,9 @@ Based on geerlingguy.ansible-role-git
 only addition is to template the config - could seprate that and use the role
 
 should the check for git installed be carried out before downloading git?
+
+ToDo use the PPA repo to install the latest version
+
 ## Requirements
 
 None.
