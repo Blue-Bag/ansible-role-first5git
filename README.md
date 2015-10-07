@@ -11,6 +11,9 @@ should the check for git installed be carried out before downloading git?
 
 ToDo use the PPA repo to install the latest version
 
+Add Redhat dependencies:
+see https://github.com/Marslo/MyBlog/blob/master/Programming/Git/GitQ%26A.md
+
 ## Requirements
 
 None.
