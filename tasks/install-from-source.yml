@@ -9,6 +9,8 @@
     - perl-devel
     - openssl-devel
     - subversion-perl
+    - gcc
+    - make
   when: ansible_os_family == 'RedHat'
 
 - name: Ensure git's dependencies are installed (Debian).
