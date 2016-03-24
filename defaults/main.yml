@@ -30,3 +30,5 @@ git_install_from_source_force_update: false
 
 # Leave this at it's default.
 git_reinstall_from_source: false
+
+git_install_from_source_cleanup: false
