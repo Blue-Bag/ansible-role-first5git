@@ -14,4 +14,4 @@
       changed_when: false
 
   roles:
-- role_under_test
+    - role_under_test
