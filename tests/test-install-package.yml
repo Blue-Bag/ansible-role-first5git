@@ -5,4 +5,4 @@
     git_install_from_source: false
     git_install_path: /usr/local
   roles:
-    - ansible-role-git
+    - role_under_test

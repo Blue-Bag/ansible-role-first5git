@@ -6,4 +6,4 @@
     git_install_path: /usr/local
     git_version: 2.1.0
   roles:
-    - ansible-role-git
+    - role_under_test
