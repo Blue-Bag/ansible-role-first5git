@@ -16,7 +16,7 @@
   when: (git_install_from_source == false) and (ansible_os_family == 'Debian')
 
 # Install git from source when git_install_from_source is true.
-- import_tasks: install-from-source.yml
+- include_tasks: install-from-source.yml
   when: git_install_from_source == true
 
   # Install the default templates
