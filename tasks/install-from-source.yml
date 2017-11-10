@@ -38,7 +38,10 @@
 - name: Force git install if the version numbers do not match
   set_fact:
     git_reinstall_from_source: true
-  when: 'git_install_from_source_force_update and (git_installed_version|success and (git_installed_version.stdout | regex_replace("^.*?([0-9\.]+)$", "\\1") | version_compare(git_version, operator="!=")))'
+  when:
+    - git_install_from_source_force_update
+    - git_installed_version.stdout is defined
+    - git_installed_version|success and (git_installed_version.stdout | regex_replace("^.*?([0-9\.]+)$", "\\1") | version_compare(git_version, operator="!="))
 
 
 - name: Download git.
