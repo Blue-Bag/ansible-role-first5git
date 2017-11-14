@@ -15,12 +15,19 @@ env:
   - distro: ubuntu1604
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    playbook: test-source.yml
+    GIT_VERSION: 2.9.3
+  - distro: ubuntu1404
+    init: /lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    playbook: test.yml
+    GIT_VERSION: 1.9.1
   # - distro: ubuntu1404
   #   init: /sbin/init
   #   run_opts: ""
-  - distro: debian8
-    init: /lib/systemd/systemd
-    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  # - distro: debian8
+  #   init: /lib/systemd/systemd
+  #   run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
 
 # Tell Travis to start Docker when it brings up an environment.
 services:
@@ -39,23 +46,27 @@ script:
 
 
   # Ansible syntax check.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/{{ playbook }} --syntax-check'
 
   # Test the Ansible role.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/{{ playbook }}'
 
   # Test role idempotence.
   - idempotence=$(mktemp)
-  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml | tee -a ${idempotence}
+  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/{{ playbook }} | tee -a ${idempotence}
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  # Test if exim is working.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ps waux | grep [e]xim'
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm exim -bV'
+  # Role specific test
+  # Ensure Git is installed and at the right version.
+  - 'docker exec --tty ${container_id} env TERM=xterm which git'
+  - 'docker exec --tty ${container_id} env TERM=xterm test -x /usr/bin/git'
+
+  - 'docker exec --tty ${container_id} env TERM=xterm git --version'
+  - 'docker exec --tty ${container_id} env TERM=xterm /usr/bin/git --version | grep -qF "$GIT_VERSION"'
 
 notifications:
   slack:
