@@ -49,6 +49,8 @@
 
 - name: check installed version result
   block:
+    - set_fact:
+        git_not_installed: true
     - name: Get installed version
       command: >
         git --version
