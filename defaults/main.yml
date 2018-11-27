@@ -13,7 +13,7 @@ git_packages:
 # the 'git_version' variable instead of using a package.
 git_install_from_source: true
 git_install_path: "/usr"
-git_version: "2.17.0"
+git_version: "2.19.1"
 
 # the following need to be overridden
 git_username: "{{ inventory_hostname_short }}"
