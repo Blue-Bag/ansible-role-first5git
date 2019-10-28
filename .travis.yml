@@ -35,7 +35,9 @@ env:
   - distro: debian8
     playbook: test.yml
     GIT_VERSION: 2.1.4
-
+  - distro: debian9
+    playbook: test.yml
+    GIT_VERSION: 2.17.0
 script:
   # Configure test script so we can run extra tests after playbook is run.
   - export container_id=$(date +%s)
