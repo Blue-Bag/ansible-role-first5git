@@ -5,7 +5,7 @@ Installs Git, a distributed version control system, on any RHEL/CentOS or Debian
 
 Based on geerlingguy.ansible-role-git
 
-only addition is to template the config - could seprate that and use the role
+only addition is to template the config - could separate that and use the role
 
 should the check for git installed be carried out before downloading git?
 
@@ -28,7 +28,7 @@ Where certain files will be downloaded and adjusted prior to git installation, i
 
     git_enablerepo: ""
 
-This variable, a well as `git_packages`, will be used to install git via a particular `yum` repo if `git_install_from_source` is false (CentOS only). Any additional repositories you have installed that you would like to use for a newer/different Git version.
+This variable, as well as `git_packages`, will be used to install git via a particular `yum` repo if `git_install_from_source` is false (CentOS only). Any additional repositories you have installed that you would like to use for a newer/different Git version.
 
     git_packages:
       - git
