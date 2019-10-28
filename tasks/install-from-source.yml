@@ -25,8 +25,9 @@
   when: ansible_os_family == 'RedHat'
 
 - name: Ensure git's dependencies are installed (Debian).
-  apt: "name={{ item }} state=present"
-  with_items: "{{ git_install_from_source_dependencies }}"
+  apt:
+    name: "{{ git_install_from_source_dependencies }}"
+    state: present
   when: ansible_os_family == 'Debian'
 
 
