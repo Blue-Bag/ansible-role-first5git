@@ -75,7 +75,7 @@
     git_reinstall_from_source: true
   when:
     - git_install_from_source_force_update or git_not_installed
-    - git_not_installed or ((git_installed_version.rc == 0) and (git_installed_version.stdout | regex_replace("^.*?([0-9\.]+)$", "\\1") | version_compare(git_version, operator="!=")))
+    - git_not_installed or ((git_installed_version.rc == 0) and (git_installed_version.stdout | regex_replace("^.*?([0-9\.]+)$", "\\1") is version(git_version, operator="!=")))
 
 - name: Download git.
   get_url:
@@ -109,4 +109,3 @@
     - "{{ workspace }}/git-{{ git_version }}.tar.gz"
     - "{{ workspace }}/git-{{ git_version }}"
   when: git_install_from_source_cleanup
-
