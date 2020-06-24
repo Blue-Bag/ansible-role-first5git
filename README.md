@@ -1,4 +1,5 @@
 # Ansible Role: Git
+[![Build Status](https://travis-ci.org/Blue-Bag/ansible-role-first5git.svg?branch=main)](https://travis-ci.org/Blue-Bag/ansible-role-first5git)
 
 
 Installs Git, a distributed version control system, on any RHEL/CentOS or Debian/Ubuntu Linux system.
